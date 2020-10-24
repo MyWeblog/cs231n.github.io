@@ -45,7 +45,7 @@ There are a few things to note:
 - First, note that the single matrix multiplication \\(W x_i\\) is effectively evaluating 10 separate classifiers in parallel (one for each class), where each classifier is a row of **W**.
 - Notice also that we think of the input data \\( (x_i, y_i) \\) as given and fixed, but we have control over the setting of the parameters **W,b**. Our goal will be to set these in such way that the computed scores match the ground truth labels across the whole training set. We will go into much more detail about how this is done, but intuitively we wish that the correct class has a score that is higher than the scores of incorrect classes.
 - An advantage of this approach is that the training data is used to learn the parameters **W,b**, but once the learning is complete we can discard the entire training set and only keep the learned parameters. That is because a new test image can be simply forwarded through the function and classified based on the computed scores.
-- Lastly, note that to classifying the test image involves a single matrix multiplication and addition, which is significantly faster than comparing a test image to all training images.
+- Lastly, note that classifying the test image involves a single matrix multiplication and addition, which is significantly faster than comparing a test image to all training images.
 
 > Foreshadowing: Convolutional Neural Networks will map image pixels to scores exactly as shown above, but the mapping ( f ) will be more complex and will contain more parameters.
 
@@ -202,7 +202,7 @@ def L_i(x, y, W):
   correct_class_score = scores[y]
   D = W.shape[0] # number of classes, e.g. 10
   loss_i = 0.0
-  for j in xrange(D): # iterate over all wrong classes
+  for j in range(D): # iterate over all wrong classes
     if j == y:
       # skip for the true class to only loop over incorrect classes
       continue
@@ -366,4 +366,4 @@ We now saw one way to take a dataset of images and map each one to class scores 
 
 These readings are optional and contain pointers of interest.
 
-- [Deep Learning using Linear Support Vector Machines](http://arxiv.org/abs/1306.0239) from Charlie Tang 2013 presents some results claiming that the L2SVM outperforms Softmax.
+- [Deep Learning using Linear Support Vector Machines](https://arxiv.org/abs/1306.0239) from Charlie Tang 2013 presents some results claiming that the L2SVM outperforms Softmax.
